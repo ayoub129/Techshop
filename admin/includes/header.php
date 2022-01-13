@@ -1,9 +1,12 @@
 <?php 
-
-session_start();
 if(isset($_POST['logout'])){
+    session_start();
     session_destroy();
-    header("Location:index.php");
+    header("Location:../index.php");
+}
+
+if(!isset($_SESSION["id"])) {
+    header("Location:../index.php");
 }
 
 ?>
@@ -46,24 +49,14 @@ if(isset($_POST['logout'])){
                     <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
-                    <?php 
-                        if(isset($_SESSION["id"])) { ?>
                             <li class="nav-item me-3">
-                              <a class="nav-link text-dark fw-bold hv-primary" href="account.php?page=1">Account</a>
+                              <a class="nav-link text-dark fw-bold hv-primary" href="../account.php?page=1">Account</a>
                             </li>
                             <li class="nav-item me-3">
                                 <form method="POST">
                                     <button type="submit" name="logout" class="btn p-0 nav-link text-dark fw-bold hv-primary" >Log Out</button>
                                 </form>
-                            </li>
-                        <?php
-                        } else {
-                        ?>
-                             <li class="nav-item me-3">
-                                <a class="nav-link text-dark fw-bold hv-primary" href="login.php">Log In</a>
-                             </li>
-                         <?php }?>
-                    |
+                            </li> |
                     <li class="nav-item ms-3">
                         <a class="nav-link  hv-primary position-relative text-dark" href="cart.php">
                              <i class="fas fa-shopping-cart me-2 "></i> <span class="fw-bold ">Cart</span> 
