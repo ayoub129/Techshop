@@ -1,5 +1,5 @@
 <?php
-    require_once('includes/PHPMailer.php');
+    require_once('includes/PHPMailer/src/PHPMailer.php');
     require_once("config/config.php"); 
     require_once("includes/header.php");
     use PHPMailer\PHPMailer\PHPMailer;
@@ -53,12 +53,14 @@
     <div class="row">
         <div class="col-md-4 col-0"></div>
         <div class="col-md-4 col-12 bg-light p-5"> 
-        <?php if($result) {?>
+        <!-- <?php 
+        // if($result) {?>
             <div class="card" style="width: 18em;">
                  We Will Send You An Email To reset  Your Password <br>
                 All Love From <a class="fw-bold text-white" href="index.php"> <span class="text-primary">T</span>echShop</a>
             </div>
-        <?php } else { ?>
+        <?php 
+    // } else { ?> -->
             <form  method="post" class="text-dark">
                 <div class="text-center mb-5">
                     <a class="fw-bold text-dark fs-3" href="index.php"> <span class="text-primary">T</span>echShop</a>
@@ -75,7 +77,8 @@
                 </div>
            
             </form>
-            <?php  } ?>
+            <?php  
+        // } ?>
         </div>
         <div class="col-md-4 col-0"></div>
     </div>

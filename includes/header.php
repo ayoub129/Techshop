@@ -6,6 +6,7 @@ if(isset($_POST['logout'])){
     header("Location:index.php");
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,16 @@ if(isset($_POST['logout'])){
                     <li class="nav-item ms-3">
                         <a class="nav-link  hv-primary position-relative text-dark" href="cart.php">
                              <i class="fas fa-shopping-cart me-2 "></i> <span class="fw-bold ">Cart</span> 
-                             <span class="position-absolute number-cart rounded-circle bg-primary text-white">0</span>    
+                             <?php                              
+                                    if(isset($_SESSION['cart'])) {
+                                        $count = count($_SESSION['cart']) ;
+                                        echo "<span class='position-absolute number-cart rounded-circle bg-primary text-white'>$count</span>";
+                                    } else {
+                                        echo "<span class='position-absolute number-cart rounded-circle bg-primary text-white'>0</span>";
+                                    }
+                             
+                             ?>
+                                 
                         </a>
                     </li>
                 </ul>

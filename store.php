@@ -1,7 +1,13 @@
 <?php 
+    // require files
     require_once("config/config.php"); 
     require_once("includes/header.php");
 
+    $sql = "SELECT count(id) as nmbr_of_products FROM `products` ";
+    $result = mysqli_query($conn , $sql);
+    $row = mysqli_fetch_assoc($result) ;
+    
+    // filters
     $filter = $_GET['filterby'];
     if($filter == "bestselling") {
         $order = "sales";
@@ -28,6 +34,34 @@
             $sort = 'DESC';
         }
     }
+
+
+        // add to cart functionality
+        if(isset($_POST['add'])) {
+            if(isset($_SESSION['cart'])) {
+                $item_arr_id = array_column($_SESSION['cart'], column_key:"product_id");
+    
+                if(in_array($_POST['product_id'] , $item_arr_id)) {
+                    echo '<script>alert("product is already added to the cart
+                    ")</script>';
+                } else {
+                    $count = count($_SESSION['cart']);
+                    $item_arr=array('product_id'=>$_POST["product_id"]);
+                    $_SESSION['cart'][$count] = $item_arr;
+                    // print_r($_SESSION['cart']);
+                }
+               
+            } else {
+    
+                $item_arr=array(
+                    'product_id'=>$_POST["product_id"],
+                );
+    
+                 $_SESSION['cart'][0] = $item_arr;
+                //  print_r(  $_SESSION['cart']);
+            }
+        }
+    
 ?>
 <!-- breadcumps -->
 <section class="container mt-5">
@@ -40,7 +74,7 @@
 </section>
    <section class="container mt-8">
        <div class="d-flex align-items-center justify-content-between my-4">
-           <p class="text-dark fw-bold">3 Products</p>
+           <p class="text-dark fw-bold"><?php echo $row['nmbr_of_products']; ?> Products</p>
            <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="drop" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php  echo $filter ?>
@@ -65,13 +99,16 @@
                      <div class="card" >
                         <img src="<?php echo $row['src'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
                         <div class="card-body">
-                                  <div class="d-flex align-items-center justify-content-between">
+                                  <form method="POST" class="d-flex align-items-center justify-content-between">
                                         <a href="product.php?id=<?php echo $row['id'] ?>" class="text-primary"><?php echo $row['name'] ?></a>
-                                        <i class="fas fa-shopping-cart cursor text-danger"></i>
-                                    </div>
+                                        <input type="hidden" name="product_id" value="<?php echo $row["id"] ?>">
+                                        <button type="submit" name="add" class="btn btn-primary">
+                                            <i class="fas fa-shopping-cart cursor "></i>
+                                        </button>
+                                    </form>
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="card-text my-3">Price: <?php echo $row['price'] ?></p>
-                                <p class="card-text my-3">Sales: <?php echo $row['sales'] ?></p>
+                                <p class="card-text my-3">Sales: <?php echo $row['sales']  ?></p>
                             </div>
                         </div>
                       </div>
