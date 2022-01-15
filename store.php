@@ -2,8 +2,9 @@
     // require files
     require_once("config/config.php"); 
     require_once("includes/header.php");
+    $collection = $_GET['collection_id'];
 
-    $sql = "SELECT count(id) as nmbr_of_products FROM `products` ";
+    $sql = "SELECT count(id) as nmbr_of_products FROM `products` WHERE `collection_id` = '$collection'";
     $result = mysqli_query($conn , $sql);
     $row = mysqli_fetch_assoc($result) ;
     
@@ -48,7 +49,6 @@
                     $count = count($_SESSION['cart']);
                     $item_arr=array('product_id'=>$_POST["product_id"]);
                     $_SESSION['cart'][$count] = $item_arr;
-                    // print_r($_SESSION['cart']);
                 }
                
             } else {
@@ -58,7 +58,6 @@
                 );
     
                  $_SESSION['cart'][0] = $item_arr;
-                //  print_r(  $_SESSION['cart']);
             }
         }
     
@@ -92,7 +91,7 @@
        </div>
        <div class="row">
            <?php 
-           $sql = "SELECT * FROM `products`  ORDER BY `$order` $sort  ";
+           $sql = "SELECT * FROM `products` WHERE `collection_id` = '$collection'  ORDER BY `$order` $sort  ";
            $result = mysqli_query($conn , $sql);
            while ($row = mysqli_fetch_assoc($result)) { ?>
                 <div class="col-md-3 col-sm-6 col-12 mb-5">

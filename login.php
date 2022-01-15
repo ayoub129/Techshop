@@ -56,9 +56,9 @@
                    <p class="text-muted">
                        Dosn't Have An Account Yet ? <a href="register.php">Register</a>
                    </p>
-                   <p class="text-muted">
+                   <!-- <p class="text-muted">
                         <a href="forgote.php">Forgote Password ?</a>
-                   </p>
+                   </p> -->
                 </div>
             </div>
         </div>

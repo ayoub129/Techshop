@@ -1,66 +1,76 @@
 <?php
-    require_once('includes/PHPMailer/src/PHPMailer.php');
-    require_once("config/config.php"); 
-    require_once("includes/header.php");
-    use PHPMailer\PHPMailer\PHPMailer;
+    // require_once("config/config.php"); 
+    // require_once("includes/header.php");
+    // require_once('includes/mailer/src/Exception.php');
+    // require_once('includes/mailer/src/SMTP.php');
+    // require_once('includes/mailer/src/PHPMailer.php');
     
-    if(isset($_POST['forgote']) && $_POST['email']) {
-        $email = $_POST["email"];
-        $sql = "SELECT * FROM `users` WHERE `email` = '$email'";
-        $result = mysqli_query($conn , $sql);
-        $count = mysqli_num_rows($result);
-      if( $count==1)
-      {
-        while($row=mysqli_fetch_array($result))
-        {
-          $email=md5($row['email']);
-          $pass=md5($row['password']);
-        }
-        $link="<a href='reset.php?key=".$email."&reset=".$pass."'>Click To Reset password</a>";
-        $mail = new PHPMailer();
-        $mail->CharSet =  "utf-8";
-        $mail->IsSMTP();
-        // enable SMTP authentication
-        $mail->SMTPAuth = true;                  
-        // GMAIL username
-        $mail->Username = "techshop000.store@gmail.com";
-        // GMAIL password
-        $mail->Password = "0699272311aA@";
-        $mail->SMTPSecure = "ssl";  
-        // sets GMAIL as the SMTP server
-        $mail->Host = "smtp.gmail.com";
-        // set the SMTP port for the GMAIL server
-        $mail->Port = "465";
-        $mail->From='techshop000.store@gmail.com';
-        $mail->FromName='Techshop';
-        $mail->AddAddress('$email', '');
-        $mail->Subject  =  'Reset Password';
-        $mail->IsHTML(true);
-        $mail->Body    = 'Click On This Link to Reset Password '.$pass.'';
-        if($mail->Send())
-        {
-          echo "Check Your Email and Click on the link sent to your email";
-        }
-        else
-        {
-          echo "Mail Error - >".$mail->ErrorInfo;
-        }
-      }	
-    }
+    // //Import PHPMailer classes into the global namespace
+    // //These must be at the top of your script, not inside a function
+    // use PHPMailer\PHPMailer\PHPMailer;
+    // use PHPMailer\PHPMailer\Exception;
+    
+    // //Create an instance; passing `true` enables exceptions
+    // $mail = new PHPMailer();
+    
+
+    
+    // if(isset($_POST['forgote']) && $_POST['email']) {
+    //     $email = $_POST["email"];
+    //     $sql = "SELECT * FROM `users` WHERE `email` = '$email'";
+    //     $result = mysqli_query($conn , $sql);
+    //     $count = mysqli_num_rows($result);
+    //     if( $count==1) {
+    //         while($row=mysqli_fetch_array($result)){
+    //         $email = $row['email'];
+    //         $pass = $row['password'];
+        
+    //         $link="<a href='reset.php?key=".$email."&reset=".$pass."'>Click To Reset password</a>";
+    //         try {
+    //             //Server settings
+    //             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    //             $mail->isSMTP();                                            //Send using SMTP
+    //             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    //             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    //             $mail->Username   = 'techshop000.store@gmail.com';                     //SMTP username
+    //             $mail->Password   = '0699272311aA@';                               //SMTP password
+    //             $mail->SMTPSecure = "ssl";            //Enable implicit TLS encryption
+    //             $mail->isHTML(true);                                  //Set email format to HTML
+    //             $mail->CharSet = "UTF-8";                                  //Set email format to HTML
+                
+    //             //Recipients
+    //             $mail->setFrom('techshop000.store@gmail.com', 'TechShop');
+    //             $mail->addAddress($email);               //Name is optional
+            
+    //             //Content
+    //             $mail->Subject = 'test';
+    //             $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    //             $mail->send();
+    //             if(!$mail->Send()) {
+    //                 echo "Mailer Error: " . $mail->ErrorInfo;
+    //             } else {
+    //                 echo "Message has been sent";
+    //             }
+    //         } catch (Exception $e) {
+    //             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    //     }
+    //   }	
+    // }
 ?>
 
-<section class="mt-5 container">
+<!-- <section class="mt-5 container">
     <div class="row">
         <div class="col-md-4 col-0"></div>
         <div class="col-md-4 col-12 bg-light p-5"> 
-        <!-- <?php 
+         <?php 
         // if($result) {?>
             <div class="card" style="width: 18em;">
                  We Will Send You An Email To reset  Your Password <br>
                 All Love From <a class="fw-bold text-white" href="index.php"> <span class="text-primary">T</span>echShop</a>
             </div>
         <?php 
-    // } else { ?> -->
+    // } else { ?>
             <form  method="post" class="text-dark">
                 <div class="text-center mb-5">
                     <a class="fw-bold text-dark fs-3" href="index.php"> <span class="text-primary">T</span>echShop</a>
@@ -82,8 +92,8 @@
         </div>
         <div class="col-md-4 col-0"></div>
     </div>
-</section>
+</section> -->
 
 <?php
-    require_once("includes/footer.php") 
+    // require_once("includes/footer.php") 
 ?>

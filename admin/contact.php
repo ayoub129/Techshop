@@ -41,6 +41,7 @@
                         <th scope="col">Sender_Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Msg</th>
+                        <th scope="col">Time</th>
                     </tr>
                 </thead>
                 <tbody >
@@ -50,11 +51,12 @@
                                 header("Location:./");
                             }
                             ?>
-                            <tr class="ms-4">
+                            <tr class="ms-4" height="5">
                                 <td scope="row" class="fw-bold w-20 "><?php echo $row2["id"] ?></td>
                                 <td scope="row" class="fw-bold w-20"><?php echo $row2["name"] ?></td>
-                                <td scope="row" class="w-20"><span class="mx-2 fw-bold"><?php echo $row2["email"] ?></span></td>
-                                <td scope="row" class="w-20"><span class="mx-2 fw-bold h-40  "><?php echo $row2["message"] ?></span></td>
+                                <td scope="row" class="w-20"><span class="fw-bold"><?php echo $row2["email"] ?></span></td>
+                                <td scope="row" class="w-20 h-40"><span class="fw-bold "><?php echo $row2["message"] ?></span></td>
+                                <td scope="row" class="w-20"><span class="fw-bold"><?php echo $row2["time"] ?></span></td>
                             </tr>
                     <?php } ?>
                 </tbody>

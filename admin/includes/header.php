@@ -1,7 +1,8 @@
 <?php 
+session_start();
+
 if(isset($_POST['logout'])){
-    session_start();
-    session_destroy();
+    unset($_SESSION['id']);
     header("Location:../index.php");
 }
 
@@ -44,25 +45,29 @@ if(!isset($_SESSION["id"])) {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex w-75 ms-4">
+                <form class="d-flex w-50 ms-4">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0">
                             <li class="nav-item me-3">
-                              <a class="nav-link text-dark fw-bold hv-primary" href="../account.php?page=1">Account</a>
+                            <a class="nav-link text-dark fw-bold hv-primary" href="../account.php?page=1">Account</a>
+                            </li>
+                            <li class="nav-item me-3">
+                              <a class="nav-link text-dark fw-bold hv-primary" href="contact.php?page=1">Contact</a>
+                            </li>
+                            <li class="nav-item me-3">
+                              <a class="nav-link text-dark fw-bold hv-primary" href="users.php?page=1">users</a>
+                            </li>
+                            <li class="nav-item me-3">
+                              <a class="nav-link text-dark fw-bold hv-primary" href="discount.php">discount</a>
                             </li>
                             <li class="nav-item me-3">
                                 <form method="POST">
                                     <button type="submit" name="logout" class="btn p-0 nav-link text-dark fw-bold hv-primary" >Log Out</button>
                                 </form>
-                            </li> |
-                    <li class="nav-item ms-3">
-                        <a class="nav-link  hv-primary position-relative text-dark" href="cart.php">
-                             <i class="fas fa-shopping-cart me-2 "></i> <span class="fw-bold ">Cart</span> 
-                             <span class="position-absolute number-cart rounded-circle bg-primary text-white">0</span>    
-                        </a>
-                    </li>
+                            </li> 
+                   
                 </ul>
             </div>
         </div>

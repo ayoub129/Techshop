@@ -35,7 +35,10 @@
                     </span>
                     <span>Products</span>
                 </div>
-                <a href="add.php" class="btn btn-outline-primary">Add New</a>
+                <div>
+                    <a href="cat.php" class="btn btn-primary">Add New Category</a>
+                    <a href="add.php" class="btn btn-outline-primary">Add New</a>
+                </div>
             </div>
             <table class="table text-dark mt-4">
                 <thead>

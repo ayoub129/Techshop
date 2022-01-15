@@ -56,10 +56,22 @@ li {
   background-size: cover;
   height: 100%;
   padding: 1em;
-  background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.5)),
+}
+
+.bg-image-1 {
+  background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.7)),
     url(../images/tech-accessories.jpg);
 }
 
+.bg-image-3 {
+  background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.7)),
+    url(../images/phoneaccessories.jpg);
+}
+
+.bg-image-2 {
+  background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.7)),
+    url(../images/image2.jpg);
+}
 /* grid */
 .grid {
   display: grid;
@@ -78,7 +90,7 @@ li {
 }
 
 .mt-8 {
-  margin-top: 8em !important;
+  margin-top: 6em !important;
 }
 
 .w-48 {
@@ -95,4 +107,28 @@ li {
 
 .cursor {
   cursor: pointer;
+}
+
+.ms-01 {
+  margin-left: 0.1em;
+}
+
+.transition {
+  transition: 1s all;
+}
+
+.cardhv {
+  overflow: hidden;
+}
+
+.cardhv:hover img {
+  transform: scale(1.1);
+}
+
+.background-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.h-200 {
+  height: 250px !important;
 }

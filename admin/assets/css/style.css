@@ -93,6 +93,6 @@ li {
 }
 
 .h-40 {
-  height: 40px;
+  height: 5px !important;
   overflow-y: scroll;
 }

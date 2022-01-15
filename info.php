@@ -4,6 +4,11 @@
     require_once("config/config.php");
     // require the header 
     require_once("includes/header.php");
+
+   
+
+    // get total price
+    $price = $_GET['total'];
 ?>
 <!-- breadcumps -->
 <section class="container mt-4">
@@ -22,9 +27,10 @@
         <div class="col-md-6 col-12">
             <h2 class="fs-1 fw-bold text-dark">Contact information</h2>
             <form method="POST">
+                <?php if(isset($_SESSION['id'])) { ?>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    <input type="email"  class="form-control" id="email" placeholder="name@example.com">
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="checkbox" checked>
@@ -32,7 +38,7 @@
                         Email me with news and offers
                     </label>
                </div>
-               <div class="line bg-secondary w-100 my-3"></div>
+               <div class="line bg-secondary w-100 my-3 "></div>
                <div class="row">
                    <div class="col-sm-6">
                         <div class="mb-3">
@@ -47,6 +53,7 @@
                         </div>
                    </div>
                </div>
+               <?php } ?>
                <div class="row">
                    <div class="col-sm-6">
                         <div class="mb-3">
@@ -84,12 +91,16 @@
         </div>
         <div class="col-md-6 col-12">
         <h2 class="fs-1 fw-bold text-dark ">Summary</h2>
+        <form method="POST" class="input-group my-4">
+            <input type="text" id="discount" class="form-control" placeholder="discount Code" aria-label="discount Code" aria-describedby="btn">
+            <button class="btn btn-outline-primary" type="submit" id="btn">Send</button>
+        </form>
         <div class="d-flex align-items-center justify-content-between ">
             <p class="text-dark">
                 Subtotal Price
             </p>
             <p class="text-dark">
-                $450.90
+                $<?php echo $price ?>
             </p>
         </div>
         <div class="d-flex align-items-center justify-content-between ">
@@ -114,7 +125,7 @@
                  Total 
             </p>
             <p class="text-dark">
-                <?php  ?>
+                $<?php echo $price ?>
             </p>
         </div>
       </div>

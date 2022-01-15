@@ -15,6 +15,8 @@
             }
         }
       }
+
+      
 ?>
 <!-- breadcumps -->
 <section class="container mt-4">
@@ -43,40 +45,40 @@
                 
                 <span>item'(s) on the cart  </span>
             </div>
-            <table class="table text-dark mt-4">
-                <thead>
-                    <tr >
-                        <th scope="col">Products</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody >
-                <?php
+            <?php
                     $total = 0;
-                    if (isset($_SESSION['cart'])){
+                    if (isset($_SESSION['cart'])){ ?>
+                    
+                    <table class="table  text-dark mt-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Products</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                    <?php
                         $product_id = array_column($_SESSION['cart'], column_key:'product_id');
                         $sql = "SELECT * FROM `products`";
                         $result = mysqli_query($conn , $sql);
                         while ($row = mysqli_fetch_assoc($result)) { 
                             foreach ($product_id as $id){
                                 if ($row['id'] == $id){ ?>
-                                <tr class="ms-4">
-                                        <td scope="row" class="row ">
-                                            <div class="col-md-6">
-                                            <a href="product.php?id=<?php echo $row['id'] ?>"><img src="<?php echo $row['src'] ?>" class="img-fluid ms-2" alt="<?php echo $row['name'] ?>"> </a>
-                                            </div>
-                                            <div class="col-md-6  text-muted">
-                                                <a href="product.php?id=<?php echo $row['id'] ?>" class="w-75 ms-2"><?php echo $row['name'] ?></a>
-                                            </div>
+                                <tr class="align-items-center">
+                                        <td scope="row" class="ms-01 ">
+                                            <a href="product.php?id=<?php echo $row['id'] ?>"><img src="<?php echo $row['src'] ?>" class="img-fluid " alt="<?php echo $row['name'] ?>"> </a>
                                         </td>
+                                        <td scope="row" class="w-15 fw-bold">
+                                                <a href="product.php?id=<?php echo $row['id'] ?>" class="w-75 text-dark ms-2"><?php echo $row['name'] ?></a>
+                                            <!-- <form  method="post">
+                                                <button id="mince" type="button" class="fw-bold p-0 px-2 btn btn-light">-</button>
+                                                <input name="quantity" class="mx-2 fw-bold w-25" id="quantity" value="1" disabled/>
+                                                <button id="adding" type="button"  class="fw-bold p-0 px-2 btn btn-light">+</button>
+                                            </form> -->
+                                            </td>
                                         <td scope="row" class="fw-bold w-15">$<?php echo $row['price'] ?></td>
-                                        <td scope="row" class="w-15">
-                                            <span  class="text-dark cursor">-</span>
-                                                <input class="mx-2 fw-bold w-25 " value="1" disabled/>
-                                            <span  class="text-dark cursor">+</span>
-                                        </td>
                                         <td scope="row" class="w-15">
                                             <form action="cart.php?action=remove&id=<?php echo $row['id'] ?>" method="POST" class="cart-items">
                                                 <button type="submit" class="btn btn-danger " name="remove">Remove</button>
@@ -87,16 +89,29 @@
                                 $total = $total + $row['price'];
                                 }
                             }
-                        }
-                    }else {
-                        echo "<h5>Cart is Empty</h5>";
-                    }
-                              
-
-                ?>
+                        } ?>
+                        </tbody>
+                    </table>
+                <?php }
+                    else { ?>
+                    <section class="mt-5 container">
+                        <div class="row">
+                            <div class="col-md-2 col-0"></div>
+                            <div class="bg-white col-md-8 col-12">
+                                <div class="text-center">
+                                <h3 class="fs-5 fw-bold">
+                                        Uh ho!
+                                </h3> 
+                                <p class="text-muted">Your Shopping Cart Is Empty</p>
+                                <a href="store.php?filterby=bestselling" class="btn btn-primary"> Take Me To Shop Now </a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-0"></div>
+                        </div>
+                    </section>
+                <?php } ?>
                     
-                </tbody>
-            </table>
+
         </div>
         <div class="col-md-3">
         <h2 class="fs-1 fw-bold text-dark ">Summary</h2>
@@ -107,7 +122,7 @@
                   if (isset($_SESSION['cart'])){
                         $count  = count($_SESSION['cart']);
                         echo "<h6>Price ($count items)</h6>";
-                    }else{
+                    } else{
                         echo "<h6>Price (0 items)</h6>";
                     }
                     ?>
@@ -122,7 +137,7 @@
         </div>
         <div class="line bg-secondary w-100"></div>
          <p class="text-muted fs-12">Shipping, taxes, and discount codes calculated at checkout.</p>
-         <a href="info.php" class="mt-3 btn w-100 btn-outline-primary fw-bold">
+         <a href="info.php?total=<?php echo $total ?>" class="mt-3 btn w-100 btn-outline-primary fw-bold">
             Go To Checkout
          </a>
         </div>
